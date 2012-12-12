@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Salvador - Render</title>
+        <title>Render | Witty CSS - A fun way to proove your ingenuity.</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -22,10 +22,10 @@
                 css = document.getElementById("css");
                 html = document.getElementById("html");
                 
-                var salvadorCode = JSON.parse( localStorage.getItem("salvadorCode") );
-                if( salvadorCode ){
-                    html.innerHTML = salvadorCode.html;
-                    css.innerHTML = PrefixFree.prefixCSS( salvadorCode.css );
+                var wittycssCode = JSON.parse( localStorage.getItem("wittycssCode") );
+                if( wittycssCode ){
+                    html.innerHTML = wittycssCode.html;
+                    css.innerHTML = PrefixFree.prefixCSS( wittycssCode.css );
                 }
             }
         </script>

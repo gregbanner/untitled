@@ -9,7 +9,7 @@
 	                                                        d"     YD           
 	                                                        "Y88888P'           
 */
-var salvador = {
+var wittycss = {
 	clientId: "d43a901f7e2623f7e3bc",
 	css: "",
 	gist: null,
@@ -22,7 +22,7 @@ var salvador = {
 	theme: "ace/theme/textmate"
 };
 
-var salvadorCode = {
+var wittycssCode = {
 	css: null,
 	html: null,
 	default: "css"
@@ -57,9 +57,9 @@ var app = {
 		/* ------------------------------------------------------------------------------------------
 		 * Get settings from localStorage
 		 * --------------------------------------------------------------------------------------- */
-		salvador = $.extend( salvador, JSON.parse( localStorage.getItem("salvador") ) );
+		wittycss = $.extend( wittycss, JSON.parse( localStorage.getItem("wittycss") ) );
 
-		$(window).trigger("salvador");
+		$(window).trigger("wittycss");
 
 		/* ------------------------------------------------------------------------------------------
 		 * HASH
@@ -89,14 +89,21 @@ var app = {
 		/* ------------------------------------------------------------------------------------------
 		 * Is Gist Page
 		 * --------------------------------------------------------------------------------------- */
+		
 		var gistID = window.location.pathname.substr( window.location.pathname.indexOf( settings.projectTag ) + settings.projectTag.length );
 
 		if( gistID.length ) {
-			salvador.gistID = gistID;
-			$(window).trigger("salvador");
+			wittycss.gistID = gistID;
+			$(window).trigger("wittycss");
 		} else { //homepage
 			
 		}
+
+		/* ------------------------------------------------------------------------------------------
+		 * Show user profile
+		 * --------------------------------------------------------------------------------------- */
+		if( wittycss.user )
+			app.user.showProfile();
 
 		app.editors.init();
 		
@@ -126,7 +133,7 @@ var app = {
 		var title = $("<h4>" + ( data.strong ? "<strong>" + data.strong + " </strong>" : "" ) + ( data.title ? data.title : "" ) + "</h4>");
 		
 		if( responseText || errorThrown || data.reportBug) {
-			s = jQuery.extend({}, salvador);
+			s = jQuery.extend({}, wittycss);
 			if( s.access_token )
 				s.access_token = true
 			else
@@ -139,7 +146,7 @@ var app = {
 
 			data.buttons.bugBtn = {
 				text: "Report a bug",
-				href: "mailto:salvador@gmail.com?Subject=Bug&Body=%0A%0A----%0A"
+				href: "mailto:wittycss@gmail.com?Subject=Bug&Body=%0A%0A----%0A"
 						+ "URL: " + window.location.href + "%0A"
 						+ "responseText: " + ( responseText ? escape(JSON.stringify(responseText)) : "" ) + "%0A"
 						+ "errorThrown: " + ( errorThrown ? escape(JSON.stringify(errorThrown)) : "" ) + "%0A"
@@ -190,7 +197,7 @@ var app = {
 	 * --------------------------------------------------------------------------------------- */
 	user: {
 		login: function() {
-			if( salvador.user ) {
+			if( wittycss.user ) {
 				app.user.showProfile();
 			} else {
 				github.user.login();
@@ -205,9 +212,9 @@ var app = {
 			$("#settings-profile")
 				.removeClass("hide")
 				.find("#avatar")
-					.append("<img src='" + salvador.user.avatar_url + "' alt='" + salvador.user.login + "' width='37' />");
+					.append("<img class='avatarimg' src='" + wittycss.user.avatar_url + "' alt='" + wittycss.user.login + "' width='37' />");
 
-			console.log(salvador.user);
+			console.log(wittycss.user);
 		}
 	},
 
@@ -216,8 +223,8 @@ var app = {
 	 * --------------------------------------------------------------------------------------- */
 
 	save: function() {
-		if( salvador.user ) {
-			if( salvador.gistID ) {
+		if( wittycss.user ) {
+			if( wittycss.gistID ) {
 				//github.gist.save();
 				console.log("SAVE");
 			} else {
@@ -231,8 +238,8 @@ var app = {
 	},
 
 	reset: function() {
-		localStorage.removeItem("salvador");
-		localStorage.removeItem("salvadorCode");
+		localStorage.removeItem("wittycss");
+		localStorage.removeItem("wittycssCode");
 		if( window.location.pathname !== "/" ) {
 			window.location.href = "/"
 		} else {
@@ -249,29 +256,29 @@ var app = {
 		 * INIT
 		 * --------------------------------------------------------------------------------------- */
 		init: function() {
-			salvadorCode = $.extend( salvadorCode, JSON.parse( localStorage.getItem("salvadorCode") ) );
+			wittycssCode = $.extend( wittycssCode, JSON.parse( localStorage.getItem("wittycssCode") ) );
 
-			$.each(salvadorCode, function(k, v) {
-				salvadorCode[k] = salvadorCode[k] ? salvadorCode[k] : salvador[k]
+			$.each(wittycssCode, function(k, v) {
+				wittycssCode[k] = wittycssCode[k] ? wittycssCode[k] : wittycss[k]
 			});
 
-			$(window).trigger("salvadorCode");
+			$(window).trigger("wittycssCode");
 
 
 			$("#editors .editor").each(function(i){
 				mode = $(this).attr("rel");
 				name = "ace" + mode;
 				app[name] = ace.edit(name);
-				app[name].setTheme( salvador.theme );
+				app[name].setTheme( wittycss.theme );
 				app[name].getSession().setMode("ace/mode/" + mode);
-				app[name].setShowPrintMargin( salvador.setShowPrintMargin );
-				app[name].setValue( salvadorCode[mode], 1 );
+				app[name].setShowPrintMargin( wittycss.setShowPrintMargin );
+				app[name].setValue( wittycssCode[mode], 1 );
 
 				app[name].on("change", app.editors.change );
 			});
 
 			//put focus on the default editor
-			app[ "ace" + salvadorCode.default].focus();
+			app[ "ace" + wittycssCode.default].focus();
 
 			$("body").addClass("loaded");
 		},
@@ -282,10 +289,10 @@ var app = {
 			
 			$(".editor").each(function(){
 				var mode = $(this).attr("rel");
-				salvadorCode[ mode ] = app[ "ace" + mode ].getValue();	
+				wittycssCode[ mode ] = app[ "ace" + mode ].getValue();	
 			});
 			
-			$(window).trigger("salvadorCode");
+			$(window).trigger("wittycssCode");
 		},
 		/* ------------------------------------------------------------------------------------------
 		 * Switch to previous editor
@@ -341,14 +348,14 @@ window.applicationCache.addEventListener('updateready', function(e){
 	                                                                                                  d"     YD            
 	                                                                                                  "Y88888P'
 */
-$(window).bind("salvador", function(e){
-	//salvador object changed. Save it in localStorage
-	localStorage.setItem("salvador", JSON.stringify( salvador ));
+$(window).bind("wittycss", function(e){
+	//wittycss object changed. Save it in localStorage
+	localStorage.setItem("wittycss", JSON.stringify( wittycss ));
 });
 
-$(window).bind("salvadorCode", function(e){
-	//salvadorCode object changed. Save it in localStorage
-	localStorage.setItem("salvadorCode", JSON.stringify( salvadorCode ));
+$(window).bind("wittycssCode", function(e){
+	//wittycssCode object changed. Save it in localStorage
+	localStorage.setItem("wittycssCode", JSON.stringify( wittycssCode ));
 });
 
 /*
@@ -374,7 +381,7 @@ var github = {
 
 		},
 		new: function() {
-			var description = "#salvador " + $("#project-name").val();
+			var description = "#wittycss " + $("#project-name").val();
 		},
 		save: function() {
 
@@ -393,9 +400,9 @@ var github = {
 				path: "/user",
 				method: "GET",
 				success: function( data ){
-					salvador.user = data;
+					wittycss.user = data;
 					app.user.showProfile();
-					$(window).trigger( "salvador" );
+					$(window).trigger( "wittycss" );
 					$(window).trigger( "userLoggedIn" );
 				}
 			};
@@ -403,23 +410,26 @@ var github = {
 
 		},
 		login: function( data ) {
+
+			console.log( data );
+
 			if( !data ) {
 				//if it's not a callback
-				if( salvador.access_a ) {
-					if( !salvador.user ) {
+				if( wittycss.access_a ) {
+					if( !wittycss.user ) {
 						github.user.get();
 					}
 				} else {
 					githubLoginWindow = open('https://github.com' + 
 						'/login/oauth/authorize' + 
-						'?client_id=' + salvador.clientId +
+						'?client_id=' + wittycss.clientId +
 						'&scope=user,gist', 'githubLogin', 'width=960, height=600, left=' + (document.documentElement.offsetWidth - 960)/2 + ', top=0');
 					githubLoginWindow.focus();
 					
 				}
 			} else {
-				salvador.access_token = data;
-				localStorage.setItem("salvador", JSON.stringify( salvador ));
+				wittycss.access_token = data;
+				localStorage.setItem("wittycss", JSON.stringify( wittycss ));
 				github.user.get();
 			}
 		}
@@ -435,7 +445,7 @@ var github = {
 			.addClass("progress");
 
 		$.ajax({
-	        url: 'https://api.github.com' + request.path + ( request.noToken ? '' : ( '?access_token=' + salvador.access_token ) ),
+	        url: 'https://api.github.com' + request.path + ( request.noToken ? '' : ( '?access_token=' + wittycss.access_token ) ),
 	        type: request.method,
 	        dataType: request.dataType ? request.dataType : "json",
 	        data: ( request.data ? JSON.stringify( request.data ) : '' ),

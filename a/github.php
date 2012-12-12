@@ -14,7 +14,7 @@ if($code) {
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "client_id=$client_id&client_secret=$client_secret&code=$code");
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-		'Origin: http://salvador.dev'
+		'Origin: http://a.wittycss.dev'
 	));
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -29,6 +29,6 @@ if($code) {
 }
 ?>
 <script>
-opener.github.user.login('<?= $token ?>');
+opener.github.user.login( "<?php echo $token; ?>" );
 close();
 </script>
