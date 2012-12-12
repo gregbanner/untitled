@@ -10,7 +10,7 @@ header('Content-type: text/html; charset=utf-8');
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Request Access | Salvador - A fun way to proove your ingenuity.</title>
+		<title>Request Access | Witty CSS - A fun way to proove your ingenuity.</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
 
@@ -23,10 +23,10 @@ header('Content-type: text/html; charset=utf-8');
 	</head>
 	<body>
 		<div class="main">
-			<h1 class="logo">Salvador</h1>
+			<h1 class="logo">Witty CSS</h1>
 			<h4>A fun way to proove your ingenuity.</h2>
 
-			<p class="lead">Salvador is in <strong>private alpha</strong>.<br />Submit your email and get the chance to early access.</p>
+			<p class="lead">Witty CSS is in <strong>private alpha</strong>.<br />Submit your email and get the chance to early access.</p>
 			<form action="./requestaccess.php" method="POST">
 				<input type="text" id="email" name="email" placeholder="Your email">
 				<button class="btn btn-large btn-inverse" type="submit">Notify me</button>

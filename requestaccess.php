@@ -34,7 +34,7 @@ if (isset($_POST['email']))
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Thank you! | Salvador - A fun way to proove your ingenuity.</title>
+		<title>Request Access | Witty CSS - A fun way to proove your ingenuity.</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
 
